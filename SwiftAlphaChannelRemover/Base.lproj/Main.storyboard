@@ -123,7 +123,7 @@
                                     <rect key="frame" x="1" y="1" width="248" height="158"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView id="KUq-58-xi6">
+                                        <collectionView selectable="YES" allowsMultipleSelection="YES" id="KUq-58-xi6">
                                             <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="primaryBackgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -177,6 +177,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="arrayController" destination="gdW-pf-4oJ" id="eAV-NP-Lce"/>
                         <outlet property="collectionView" destination="KUq-58-xi6" id="ebB-3U-Gwe"/>
                         <outlet property="infoLabel" destination="yhf-z7-cid" id="ZPU-IH-trh"/>
                         <outlet property="processButton" destination="5Jx-3z-fem" id="VYx-f2-0yU"/>
@@ -196,11 +197,11 @@
             </objects>
             <point key="canvasLocation" x="75" y="893"/>
         </scene>
-        <!--Collection View Item-->
+        <!--Image Collection View Item-->
         <scene sceneID="2K5-3i-T9Y">
             <objects>
                 <customObject id="sYQ-47-MUu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <collectionViewItem storyboardIdentifier="imageItemView" id="4A5-Af-kcx" sceneMemberID="viewController">
+                <collectionViewItem storyboardIdentifier="imageItemView" id="4A5-Af-kcx" customClass="ImageCollectionViewItem" customModule="SwiftAlphaChannelRemover" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="RuR-xC-eIt">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -219,22 +220,33 @@
                                     <binding destination="4A5-Af-kcx" name="value" keyPath="self.representedObject.fileName" id="m5d-TK-wB9"/>
                                 </connections>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JaS-ez-hzi">
-                                <rect key="frame" x="2" y="37" width="146" height="161"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="crj-pJ-kpr"/>
-                                <connections>
-                                    <binding destination="4A5-Af-kcx" name="value" keyPath="self.representedObject.thumbnailImage" id="eoO-54-h4m"/>
-                                </connections>
-                            </imageView>
+                            <customView focusRingType="exterior" translatesAutoresizingMaskIntoConstraints="NO" id="0De-LS-TcE" customClass="ImageBackgroundView" customModule="SwiftAlphaChannelRemover" customModuleProvider="target">
+                                <rect key="frame" x="5" y="40" width="140" height="155"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JaS-ez-hzi">
+                                        <rect key="frame" x="3" y="3" width="134" height="149"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="crj-pJ-kpr"/>
+                                        <connections>
+                                            <binding destination="4A5-Af-kcx" name="value" keyPath="self.representedObject.thumbnailImage" id="eoO-54-h4m"/>
+                                        </connections>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="JaS-ez-hzi" firstAttribute="leading" secondItem="0De-LS-TcE" secondAttribute="leading" constant="3" id="Vq8-NW-QWF"/>
+                                    <constraint firstAttribute="bottom" secondItem="JaS-ez-hzi" secondAttribute="bottom" constant="3" id="jx1-GD-zgh"/>
+                                    <constraint firstAttribute="trailing" secondItem="JaS-ez-hzi" secondAttribute="trailing" constant="3" id="uAA-1k-NBD"/>
+                                    <constraint firstItem="JaS-ez-hzi" firstAttribute="top" secondItem="0De-LS-TcE" secondAttribute="top" constant="3" id="xon-4e-yVU"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="JaS-ez-hzi" secondAttribute="trailing" constant="5" id="8cH-zt-Twk"/>
-                            <constraint firstItem="JaS-ez-hzi" firstAttribute="top" secondItem="RuR-xC-eIt" secondAttribute="top" constant="5" id="OJB-Wp-4tL"/>
+                            <constraint firstItem="PVX-YF-JZA" firstAttribute="top" secondItem="0De-LS-TcE" secondAttribute="bottom" constant="5" id="CUo-Lk-UoM"/>
+                            <constraint firstItem="0De-LS-TcE" firstAttribute="top" secondItem="RuR-xC-eIt" secondAttribute="top" constant="5" id="WDG-fl-nRw"/>
+                            <constraint firstItem="0De-LS-TcE" firstAttribute="leading" secondItem="RuR-xC-eIt" secondAttribute="leading" constant="5" id="aeh-Cv-nkP"/>
                             <constraint firstItem="PVX-YF-JZA" firstAttribute="leading" secondItem="RuR-xC-eIt" secondAttribute="leading" constant="10" id="aqe-U6-p3S"/>
                             <constraint firstAttribute="bottom" secondItem="PVX-YF-JZA" secondAttribute="bottom" constant="5" id="dQW-bD-7gW"/>
-                            <constraint firstItem="PVX-YF-JZA" firstAttribute="top" secondItem="JaS-ez-hzi" secondAttribute="bottom" constant="5" id="p0D-px-gfo"/>
+                            <constraint firstAttribute="trailing" secondItem="0De-LS-TcE" secondAttribute="trailing" constant="5" id="w4i-fU-HXi"/>
                             <constraint firstAttribute="trailing" secondItem="PVX-YF-JZA" secondAttribute="trailing" constant="10" id="x5R-da-RgP"/>
-                            <constraint firstItem="JaS-ez-hzi" firstAttribute="leading" secondItem="RuR-xC-eIt" secondAttribute="leading" constant="5" id="yzW-iH-Kkf"/>
                         </constraints>
                     </view>
                 </collectionViewItem>

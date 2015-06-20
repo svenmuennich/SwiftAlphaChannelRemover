@@ -27,15 +27,21 @@ import Cocoa
 
 class ViewController: NSViewController, NSCollectionViewDelegate {
 
-	@IBOutlet weak var collectionView: NSCollectionView!
-	@IBOutlet weak var infoLabel: NSTextField!
-	@IBOutlet weak var processButton: NSButton!
+	@IBOutlet var arrayController: NSArrayController!
+	@IBOutlet var collectionView: NSCollectionView!
+	@IBOutlet var infoLabel: NSTextField!
+	@IBOutlet var processButton: NSButton!
 	dynamic var items: [ImageItem] = []
+
+	private var context = 0
 
 	// MARK: - View lifecycle
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
+		// Observe changes in the item selection
+		self.arrayController.addObserver(self, forKeyPath: "selectionIndexes", options: .New, context: &(self.context))
 
 		// Fix connection of collection item
 		let proto = self.storyboard?.instantiateControllerWithIdentifier("imageItemView") as! NSCollectionViewItem
@@ -44,6 +50,10 @@ class ViewController: NSViewController, NSCollectionViewDelegate {
 		// Prepare dropping of items from finder
 		let types = [NSFilenamesPboardType]
 		self.collectionView!.registerForDraggedTypes(types)
+	}
+
+	deinit {
+		self.arrayController.removeObserver(self, forKeyPath: "selectionIndexes", context: &(self.context))
 	}
 
 	// MARK: - NSCollectionView delegate
@@ -68,6 +78,22 @@ class ViewController: NSViewController, NSCollectionViewDelegate {
 		self.infoLabel.hidden = (self.items.count > 0)
 
 		return files.count > 0
+	}
+
+	// MARK: - KVO
+
+	override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+		if context != &(self.context) {
+			super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+			return
+		}
+
+		// Update the selected item views
+		println("\(self.arrayController.selectionIndexes)")
+		self.arrayController.selectionIndexes.enumerateIndexesUsingBlock { (index, stop) -> Void in
+			let item = self.collectionView.itemAtIndex(index)
+			println("\(item)")
+		}
 	}
 
 	// MARK: - Public methods
