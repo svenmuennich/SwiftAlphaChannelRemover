@@ -203,28 +203,14 @@
                 <customObject id="sYQ-47-MUu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <collectionViewItem storyboardIdentifier="imageItemView" id="4A5-Af-kcx" customClass="ImageCollectionViewItem" customModule="SwiftAlphaChannelRemover" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="RuR-xC-eIt">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="170"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PVX-YF-JZA">
-                                <rect key="frame" x="8" y="5" width="134" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="BX2-D4-Oj1"/>
-                                </constraints>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="0FX-le-1RU">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="4A5-Af-kcx" name="value" keyPath="self.representedObject.fileName" id="m5d-TK-wB9"/>
-                                </connections>
-                            </textField>
                             <customView focusRingType="exterior" translatesAutoresizingMaskIntoConstraints="NO" id="0De-LS-TcE" customClass="ImageBackgroundView" customModule="SwiftAlphaChannelRemover" customModuleProvider="target">
-                                <rect key="frame" x="5" y="40" width="140" height="155"/>
+                                <rect key="frame" x="5" y="25" width="140" height="140"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JaS-ez-hzi">
-                                        <rect key="frame" x="3" y="3" width="134" height="149"/>
+                                        <rect key="frame" x="3" y="3" width="134" height="134"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="crj-pJ-kpr"/>
                                         <connections>
                                             <binding destination="4A5-Af-kcx" name="value" keyPath="self.representedObject.thumbnailImage" id="eoO-54-h4m"/>
@@ -238,6 +224,20 @@
                                     <constraint firstItem="JaS-ez-hzi" firstAttribute="top" secondItem="0De-LS-TcE" secondAttribute="top" constant="3" id="xon-4e-yVU"/>
                                 </constraints>
                             </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PVX-YF-JZA">
+                                <rect key="frame" x="8" y="5" width="134" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="BX2-D4-Oj1"/>
+                                </constraints>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="0FX-le-1RU">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="4A5-Af-kcx" name="value" keyPath="self.representedObject.fileName" id="m5d-TK-wB9"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="PVX-YF-JZA" firstAttribute="top" secondItem="0De-LS-TcE" secondAttribute="bottom" constant="5" id="CUo-Lk-UoM"/>
@@ -251,7 +251,7 @@
                     </view>
                 </collectionViewItem>
             </objects>
-            <point key="canvasLocation" x="421" y="743"/>
+            <point key="canvasLocation" x="421" y="728"/>
         </scene>
     </scenes>
 </document>
